@@ -66,7 +66,7 @@ This is a simple Django project that demonstrates how to create a one-to-one rel
 4. Start project
 
     ```bash
-    django-admin startproject core
+    django-admin startproject core .
     ```
 
 5. Start app
