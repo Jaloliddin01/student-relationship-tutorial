@@ -4,7 +4,7 @@ This is a simple Django project that demonstrates how to create a one-to-one rel
 
 ## Database diagram
 
-![db]('db1.jpeg')
+![db](db1.jpeg)
 
 ## Database schema
 
