@@ -1,6 +1,6 @@
 # student_relationship
 
-This is a simple Django project that demonstrates how to create a one-to-one relationship between two models.
+This is a simple Django project that demonstrates how to create a one-to-one relationship between multiple models.
 
 ## Database diagram
 
