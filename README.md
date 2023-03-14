@@ -11,6 +11,8 @@ This is a simple Django project that demonstrates how to create a one-to-one rel
 | id | integer | Primary key |
 | first\_name | string |  Student first name |
 | last\_name | string | Student last name |
+| contact | integer | Foreign key to contact table |
+| address | integer | Foreign key to address table |
 
 2.Contact
 
@@ -82,18 +84,9 @@ This is a simple Django project that demonstrates how to create a one-to-one rel
     `api/models.py`
 
     ```python
-
-    class Student(models.Model):
-        first_name = models.CharField(max_length=50)
-        last_name = models.CharField(max_length=50)
-
-        def __str__(self):
-            return self.first_name + ' ' + self.last_name
-
     class Contact(models.Model):
         phone = models.CharField(max_length=50)
         email = models.CharField(max_length=50)
-        student = models.OneToOneField(Student, on_delete=models.CASCADE)
 
         def __str__(self):
             return self.phone + ' ' + self.email
@@ -102,23 +95,51 @@ This is a simple Django project that demonstrates how to create a one-to-one rel
         street = models.CharField(max_length=50)
         city = models.CharField(max_length=50)
         country = models.CharField(max_length=50)
-        student = models.OneToOneField(Student, on_delete=models.CASCADE)
 
         def __str__(self):
             return self.street + ' ' + self.city + ' ' + self.country
+
+    class Student(models.Model):
+        first_name = models.CharField(max_length=50)
+        last_name = models.CharField(max_length=50)
+        contact = models.OneToOneField(Contact, on_delete=models.CASCADE)
+        address = models.OneToOneField(Address, on_delete=models.CASCADE)
+
+        def __str__(self):
+            return self.first_name + ' ' + self.last_name
     ```
 
-8. Register models
+8. Register models in admin.py
 
+    ```python
+    from django.contrib import admin
+    from .models import Student, Contact, Address
 
-## Getting data from a one-to-one relationship
+    admin.site.register(Student)
+    admin.site.register(Contact)
+    admin.site.register(Address)
+    ```
 
-```python
+9. Create migrations
 
-student = Student.objects.get(id=1)
-contact = student.contact
-address = student.address
+    ```bash
+    python manage.py makemigrations api
+    ```
 
-```
+10. Migrate
 
-## Creating a one-to-one relationship
+    ```bash
+    python manage.py migrate
+    ```
+
+11. Create superuser
+
+    ```bash
+    python manage.py createsuperuser --username "admin" --email "example@gmail.com"
+    ```
+
+12. Run server
+
+    ```bash
+    python manage.py runserver
+    ```
