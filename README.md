@@ -2,6 +2,10 @@
 
 This is a simple Django project that demonstrates how to create a one-to-one relationship between two models.
 
+## Database diagram
+
+![db]('db1.jpeg')
+
 ## Database schema
 
 1.Student
