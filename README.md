@@ -29,35 +29,87 @@ This is a simple Django project that demonstrates how to create a one-to-one rel
 | city | string | Student city |
 | country | string | Student country |
 
-## Django Models
+## getting started
 
-```python
+1. Create a virtual environment
 
-class Student(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
+    ```bash
+    python3 -m venv venv
+    ```
 
-    def __str__(self):
-        return self.first_name + ' ' + self.last_name
+2. Activate the virtual environment
 
-class Contact(models.Model):
-    phone = models.CharField(max_length=50)
-    email = models.CharField(max_length=50)
-    student = models.OneToOneField(Student, on_delete=models.CASCADE)
+    linux and mac
 
-    def __str__(self):
-        return self.phone + ' ' + self.email
+    ```bash
+    source venv/bin/activate
+    ```
 
-class Address(models.Model):
-    street = models.CharField(max_length=50)
-    city = models.CharField(max_length=50)
-    country = models.CharField(max_length=50)
-    student = models.OneToOneField(Student, on_delete=models.CASCADE)
+    windows
 
-    def __str__(self):
-        return self.street + ' ' + self.city + ' ' + self.country
+    ```bash
+    source venv/Scripts/activate
+    ```
 
-```
+3. Install the requirements
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4. Start project
+
+    ```bash
+    django-admin startproject core
+    ```
+
+5. Start app
+
+    ```bash
+    python manage.py startapp api
+    ```
+
+6. Add app to settings.py
+
+    ```python
+    INSTALLED_APPS = [
+        'api.apps.ApiConfig',
+    ]
+    ```
+
+7. Create models
+
+    `api/models.py`
+
+    ```python
+
+    class Student(models.Model):
+        first_name = models.CharField(max_length=50)
+        last_name = models.CharField(max_length=50)
+
+        def __str__(self):
+            return self.first_name + ' ' + self.last_name
+
+    class Contact(models.Model):
+        phone = models.CharField(max_length=50)
+        email = models.CharField(max_length=50)
+        student = models.OneToOneField(Student, on_delete=models.CASCADE)
+
+        def __str__(self):
+            return self.phone + ' ' + self.email
+
+    class Address(models.Model):
+        street = models.CharField(max_length=50)
+        city = models.CharField(max_length=50)
+        country = models.CharField(max_length=50)
+        student = models.OneToOneField(Student, on_delete=models.CASCADE)
+
+        def __str__(self):
+            return self.street + ' ' + self.city + ' ' + self.country
+    ```
+
+8. Register models
+
 
 ## Getting data from a one-to-one relationship
 
