@@ -7,6 +7,12 @@ class Contact(models.Model):
     def __str__(self):
         return self.phone + ' ' + self.email
 
+    def to_dict(self):
+        return {
+            'phone': self.phone,
+            'email': self.email
+        }
+
 class Address(models.Model):
     street = models.CharField(max_length=50)
     city = models.CharField(max_length=50)
